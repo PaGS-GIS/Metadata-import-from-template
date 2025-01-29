@@ -3,4 +3,4 @@
 
 
 # PythonNotebooks
-Created to PythonNotebooks fro ArcPro
+This repository contains PythonNotebooks for ArcPro
