@@ -8,3 +8,5 @@ This repository contains PythonNotebooks for ArcPro
 
 ## Notebook Download
 [![Import Metadata from Template](https://img.shields.io/badge/Import_Metadata_from_Template-Download-blue?style=for-the-badge)](https://github.com/PaGS-GIS/Python-Notebooks/blob/main/ImportMetadataFromTemplate.ipynb)
+
+## Arcade Download
