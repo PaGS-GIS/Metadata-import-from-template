@@ -6,7 +6,7 @@ This repository contains Arcade scripts for attribute rules and Python notebooks
 ## Python Notebook Download
 [![Import Metadata from Template](https://img.shields.io/badge/Import_Metadata_from_Template-blue?style=for-the-badge)](https://github.com/PaGS-GIS/Python-Notebooks/blob/main/ImportMetadataFromTemplate.ipynb)
 
-[![Create Metadata](https://img.shields.io/badge/Import_Metadata_from_Template-blue?style=for-the-badge)](https://github.com/PaGS-GIS/Python-Notebooks/blob/main/CreateMetadata.ipynb)
+[![Create Metadata](https://img.shields.io/badge/Create_Metadata-blue?style=for-the-badge)](https://github.com/PaGS-GIS/Python-Notebooks/blob/main/CreateMetadata.ipynb)
 
 [![Create Metadata](https://img.shields.io/badge/Create Metadata-blue?style=for-the-badge)](https://github.com/PaGS-GIS/Python-Notebooks/blob/main/CreateMetadata.ipynb)
 
