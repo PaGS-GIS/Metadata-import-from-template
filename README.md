@@ -1,6 +1,10 @@
 <h1 style="display: inline-block; vertical-align: middle;">Python Notebooks</h1>
 <img src="https://github.com/user-attachments/assets/3d867e21-deed-4fcb-95b0-1856dad3ea1d" width="175" align="right">
   
+<div style="display: flex; align-items: flex-end;">
+    <h1 style="margin: 0;">Python Notebooks</h1>
+    <img src="https://github.com/user-attachments/assets/3d867e21-deed-4fcb-95b0-1856dad3ea1d" width="175" style="margin-left: 10px;">
+</div>
 
 
   
