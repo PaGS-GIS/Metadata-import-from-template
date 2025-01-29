@@ -1,6 +1,6 @@
-<div style="display: flex; align-items: flex-end;">
+<div style="display: flex; align-items: flex-end; justify-content: space-between; width: 100%;">
     <h1 style="margin: 0;">Python Notebooks</h1>
-    <img src="https://github.com/user-attachments/assets/3d867e21-deed-4fcb-95b0-1856dad3ea1d" width="175" style="margin-left: 10px;">
+    <img src="https://github.com/user-attachments/assets/3d867e21-deed-4fcb-95b0-1856dad3ea1d" width="175">
 </div>
 
 
