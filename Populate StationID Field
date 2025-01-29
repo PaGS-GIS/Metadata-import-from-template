@@ -1,0 +1,50 @@
+//This code doesn't fully function yet. It is supposed to return the first three letter of the quad the point feature is in, then a sequential number, and then the user name. Currently it only returns the first three letters of the quad name and the sequential number
+
+// Get the quadrangle layer and the intersecting quadrangle for the point
+var quads = FeatureSetByName($map, 'QuadIndex', ['cell_name']);
+var quad = First(Intersects($feature, quads));
+
+// Initialize quadID and check if the quadrangle is found
+var quadID = "";
+if (!IsEmpty(quad)) {
+    // Extract the first 3 letters of the quadrangle cell name
+    quadID = Upper(Left(quad['cell_name'], 3));
+}
+
+// Determine the next sequential number
+var layer = FeatureSetByName($map, "PointLayer", ["StationID"]); // Replace "PointLayer" with your actual layer name
+var maxNumber = 0;
+
+for (var f in layer) {
+    // Extract the StationID and check the numeric part
+    var existingID = f["StationID"];
+    if (!IsEmpty(existingID)) {
+        // Ensure the StationID starts with the same quadID
+        if (Left(existingID, 3) == quadID) {
+            // Extract the numeric part after the quadID
+            var numericPart = Number(Text(existingID).Substring(3)); // Extract digits after the quadID
+            if (IsNaN(numericPart) == false && numericPart > maxNumber) {
+                maxNumber = numericPart;
+            }
+        }
+    }
+}
+
+// The next sequential number
+var seqNumber = maxNumber + 1;
+
+// Combine parts for the final StationID
+var stationID = Concatenate([quadID, seqNumber]);
+
+// Check if the 'temp' field has a value, and append it to the StationID
+var tempValue = $feature.temp;  // Get the value from the 'temp' field
+if (!IsEmpty(tempValue)) {
+    stationID = Concatenate([stationID, tempValue]);  // Append the 'temp' field value
+}
+
+// Return the result if StationID is empty
+if (IsEmpty($feature.StationID)) {
+    return stationID;
+} else {
+    return $feature.StationID;  // Return existing StationID if already filled
+}
