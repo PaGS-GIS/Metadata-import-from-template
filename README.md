@@ -8,7 +8,5 @@ This repository contains Arcade scripts for attribute rules and Python notebooks
 
 [![Create Metadata](https://img.shields.io/badge/Create_Metadata-blue?style=for-the-badge)](https://github.com/PaGS-GIS/Python-Notebooks/blob/main/CreateMetadata.ipynb)
 
-[![Create Metadata](https://img.shields.io/badge/Create Metadata-blue?style=for-the-badge)](https://github.com/PaGS-GIS/Python-Notebooks/blob/main/CreateMetadata.ipynb)
-
 ## Arcade Download
-[![Populate StatoinID Field](https://img.shields.io/badge/Populate StatoinID Field-blue?style=for-the-badge)](https://github.com/PaGS-GIS/Python-Notebooks/blob/main/Populate%20StationID%20Field)
+[![Populate StationID Field](https://img.shields.io/badge/Populate_StationID_Field-blue?style=for-the-badge)](https://github.com/PaGS-GIS/Python-Notebooks/blob/main/Populate%20StationID%20Field)
