@@ -1,6 +1,6 @@
 <div style="display: flex; align-items: flex-end; justify-content: space-between; width: 100%;">
     <h1 style="margin: 0;">Python Notebooks</h1>
-    <img src="https://github.com/user-attachments/assets/3d867e21-deed-4fcb-95b0-1856dad3ea1d" width="175">
+    <img src="[https://github.com/user-attachments/assets/3d867e21-deed-4fcb-95b0-1856dad3ea1d](https://github.com/PaGS-GIS/Metadata-import-from-template/blob/main/PAGS_Color_Transparent.gif)" width="175">
 </div>
 
 
