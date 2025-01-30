@@ -1,4 +1,4 @@
-//This code appears ot work propperly until it is used in the Field Map map. This verson of the code requires a field titled temp. The temp field will populate with the user's name, seperated at the @.
+//Code returns -unknown. It should be using the value from the Creator field and populating the StationID field from that value
 
 // Get the quadrangle layer and the intersecting quadrangle for the point
 var quads = FeatureSetByName($map, 'QuadIndex', ['cell_name']);
@@ -33,22 +33,27 @@ for (var f in layer) {
 // The next sequential number
 var seqNumber = maxNumber + 1;
 
-// Extract username from the 'Creator' field (before the @ symbol) and prepend a dash
-var username = $feature.Creator;
-var usernamePrefix = "";
-if (!IsEmpty(username)) {
-    var usernameParts = Split(username, "@");
-    usernamePrefix = "-" + usernameParts[0];  // Add a dash before the username
+// Retrieve and clean the Creator field
+var creator = Trim(Lower($feature.Creator)); // Convert to lowercase and remove spaces
+var suffix = "";
+
+// Mapping of Creator email to their respective suffixes
+var userMap = {
+    "morgbaker@pa.gov_DCNR": "-morgbaker",
+    "chrisoest@pa.gov": "-chrisoest",
+    "janedoe@pa.gov": "-janedoe",
+    "johndoe@pa.gov": "-johndoe"
+};
+
+// Assign the predefined suffix if the creator exists in the mapping
+if (HasKey(userMap, creator)) {
+    suffix = userMap[creator];
+} else {
+    suffix = "-unknown"; // Default value for unmatched creators (optional)
 }
 
-// Get the value from the 'temp' field
-var tempValue = $feature.temp;
-if (IsEmpty(tempValue)) {
-    tempValue = "";  // Ensure it doesn't break concatenation if empty
-}
-
-// Combine parts for the final StationID: QUAD + SeqNumber + Temp + Username
-var stationID = Concatenate([quadID, seqNumber, tempValue, usernamePrefix]);
+// Combine parts for the final StationID: QUAD + SeqNumber + Predefined Suffix
+var stationID = Concatenate([quadID, seqNumber, suffix]);
 
 // Return the result if StationID is empty
 if (IsEmpty($feature.StationID)) {
