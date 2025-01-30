@@ -1,4 +1,4 @@
-//This code doesn't fully function yet. It is supposed to return the first three letter of the quad the point feature is in, then a sequential number, and then the user name. Currently it only returns the first three letters of the quad name and the sequential number
+//This code doesn't fully function yet. It is supposed to return the first three letter of the quad the point feature is in, then a sequential number, and then the user name. Currently it only returns the first three letters of the quad name and the sequential number.
 
 // Get the quadrangle layer and the intersecting quadrangle for the point
 var quads = FeatureSetByName($map, 'QuadIndex', ['cell_name']);
