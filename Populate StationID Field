@@ -1,4 +1,4 @@
-//This code doesn't fully function yet. It is supposed to return the first three letter of the quad the point feature is in, then a sequential number, and then the user name. Currently it only returns the first three letters of the quad name and the sequential number.
+//This code doesn't fully function yet. It is supposed to return the first three letter of the quad the point feature is in, then a sequential number, and then the user name. Currently it doesn't return a sequential number. The number is always 1.
 
 // Get the quadrangle layer and the intersecting quadrangle for the point
 var quads = FeatureSetByName($map, 'QuadIndex', ['cell_name']);
@@ -12,20 +12,17 @@ if (!IsEmpty(quad)) {
 }
 
 // Determine the next sequential number
-var layer = FeatureSetByName($map, "PointLayer", ["StationID"]); // Replace "PointLayer" with your actual layer name
+var layer = FeatureSetByName($map, "PointLayer", ["StationID"]); // Replace with actual layer name
 var maxNumber = 0;
 
 for (var f in layer) {
-    // Extract the StationID and check the numeric part
     var existingID = f["StationID"];
-    if (!IsEmpty(existingID)) {
-        // Ensure the StationID starts with the same quadID
-        if (Left(existingID, 3) == quadID) {
-            // Extract the numeric part after the quadID
-            var numericPart = Number(Text(existingID).Substring(3)); // Extract digits after the quadID
-            if (IsNaN(numericPart) == false && numericPart > maxNumber) {
-                maxNumber = numericPart;
-            }
+    if (!IsEmpty(existingID) && Left(existingID, 3) == quadID) {
+        // Extract numeric portion (handles cases where suffix may exist)
+        var numPart = Text(existingID).Replace("[^0-9]", ""); // Extract only numbers
+        var numericPart = Number(numPart);
+        if (!IsNaN(numericPart) && numericPart > maxNumber) {
+            maxNumber = numericPart;
         }
     }
 }
@@ -33,18 +30,38 @@ for (var f in layer) {
 // The next sequential number
 var seqNumber = maxNumber + 1;
 
-// Combine parts for the final StationID
+// Construct the base StationID (without suffix)
 var stationID = Concatenate([quadID, seqNumber]);
 
-// Check if the 'temp' field has a value, and append it to the StationID
-var tempValue = $feature.temp;  // Get the value from the 'temp' field
-if (!IsEmpty(tempValue)) {
-    stationID = Concatenate([stationID, tempValue]);  // Append the 'temp' field value
+// Retrieve the current signed-in ArcGIS username
+var userInfo = GetUser();
+var currentUser = Lower(userInfo.username); // Use `username` field
+
+// Mapping of ArcGIS usernames to their respective suffixes
+var userMap = {
+    "morgbaker@pa.gov_dcnr": "-mcb",
+    "chrisoest@pa.gov": "-chrisoest",
+    "janedoe@pa.gov": "-janedoe",
+    "johndoe@pa.gov": "-johndoe"
+};
+
+// Check if StationID already contains a known suffix
+var hasSuffix = False;
+for (var key in userMap) {
+    if (Find(userMap[key], stationID) > -1) {
+        hasSuffix = True;
+        break;
+    }
 }
 
-// Return the result if StationID is empty
+// Append suffix **ONLY IF** it's missing
+if (!hasSuffix && HasKey(userMap, currentUser)) {
+    stationID = Concatenate([stationID, userMap[currentUser]]);
+}
+
+// Return StationID only if it's not already set
 if (IsEmpty($feature.StationID)) {
     return stationID;
 } else {
-    return $feature.StationID;  // Return existing StationID if already filled
+    return $feature.StationID;  // Keep existing StationID
 }
